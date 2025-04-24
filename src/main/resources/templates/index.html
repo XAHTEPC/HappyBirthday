@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Color Squares</title>
+    <style>
+        .square {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            display: inline-block;
+            text-align: center;
+            line-height: 50px;
+            color: white;
+            border: 1px solid #333;
+        }
+
+        .square-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
+            width: fit-content;
+        }
+
+        .square-row {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center;">Цветные квадраты</h1>
+
+<div class="square-container">
+    <!-- Группируем квадраты по 5 в ряд -->
+    <div th:each="row : ${#numbers.sequence(0, 5)}" class="square-row">
+        <div th:each="col : ${#numbers.sequence(1, 5)}"
+             th:with="index=${row*5 + col}"
+             th:if="${index <= 30}"
+             class="square"
+             th:style="'background-color: ' + ${squares.get(index)}"
+             th:text="${index}"></div>
+    </div>
+</div>
+
+</body>
+</html>
